@@ -1,0 +1,111 @@
+package ranking.org;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class Students_Ranking_System {
+	public static void main(String[] args) {
+		List<Student> list=new ArrayList<>();
+		list.add(new Student(100,"Subha",90,"CSE"));
+		list.add(new Student(101,"Shree",92,"CSE-CS"));
+		list.add(new Student(102,"Dhara",95,"CSE-IOT"));
+		list.add(new Student(103,"Harini",91,"CSE"));
+		list.add(new Student(104,"Jai",97,"CSE-IOT"));
+		list.add(new Student(105,"Kavi",98,"CSE-CS"));
+		list.add(new Student(106,"Rohini",96,"CSE"));
+		list.sort(Comparator.comparingInt((o1)->o1.roll));
+		System.out.println("Sorted using roll ");
+		list.forEach(System.out::println);
+		System.out.println();
+		System.out.println("-------------------------------- ");
+		System.out.println();
+		list.sort(Comparator.comparing((o1)->o1.name));
+		System.out.println("Sorted using name ");
+		list.forEach(System.out::println);
+		System.out.println();
+		System.out.println("-------------------------------- ");
+		System.out.println();
+		list.sort(Comparator.comparingInt((o1)->o1.marks));
+		System.out.println("Sorted using marks ");
+		list.forEach(System.out::println);
+		System.out.println();
+		System.out.println("-------------------------------- ");
+		System.out.println();
+		System.out.println("Top 5 score ");
+		list.sort(Comparator.comparingInt((Student o1)->o1.marks).reversed());
+		for(int i=0;i<5;i++) {
+			System.out.println(list.get(i));
+		}
+		System.out.println();
+		System.out.println("-------------------------------- ");
+		System.out.println();
+//		ArrayList<Student> cse=new ArrayList<>();
+//		for(int i=0;i<list.size();i++) {
+//			if(list.get(i).department.equals("CSE")){
+//				cse.add(list.get(i));
+//			}
+//		}
+//		cse.sort(Comparator.comparingInt((o1)->o1.marks));
+//		ArrayList<Student> cs=new ArrayList<>();
+//		for(int i=0;i<list.size();i++) {
+//			if(list.get(i).department.equals("CSE-CS")){
+//				cs.add(list.get(i));
+//			}
+//		}
+//		cs.sort(Comparator.comparingInt((o1)->o1.marks));
+//		ArrayList<Student> iot=new ArrayList<>();
+		int csemax=0;
+		int cseiot=0;
+		int csecs=0;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).department.equals("CSE")){
+				csemax=Math.max(csemax,list.get(i).marks);
+			}
+		}
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).department.equals("CSE-IOT")){
+				cseiot=Math.max(cseiot,list.get(i).marks);
+			}
+		}
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).department.equals("CSE-CS")){
+				csecs=Math.max(csecs,list.get(i).marks);
+			}
+		}
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).marks==csemax) {
+				System.out.println("max in cse "+list.get(i));
+			}
+			if(list.get(i).marks==cseiot) {
+				System.out.println("max in cseiot "+list.get(i));
+			}
+			if(list.get(i).marks==csecs) {
+				System.out.println("Max in csecs "+list.get(i));
+			}
+		}
+		
+//		iot.sort(Comparator.comparingInt((o1)->o1.marks));
+//		System.out.println("Topper at cse dept : "+cse.get(1));
+//		System.out.println("Topper at cyber dept : "+cs.get(1));
+//		System.out.println("Topper at iot dept : "+iot.get(1));
+//		System.out.println();
+//		System.out.println("------------------------------");
+		System.out.println();
+		System.out.println("Students more than 80%");
+		System.out.println();
+		int c=0;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).marks>80) {
+				System.out.println(list.get(i));
+				c++;
+			}
+		}
+		System.out.println("------------------------------");
+		System.out.println();
+		System.out.println("Students more than 80% count "+c);
+		System.out.println();
+		
+	}
+
+}
